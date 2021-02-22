@@ -1,22 +1,29 @@
 <template>
   <div class="list-beers">
-
+    <div class="beer-info" v-for="beer in allBeers" :key="beer.id">
+      <BeerItem v-bind:beer="beer" />
+    </div>
   </div>
 </template>
 
 
-
-
 <script>
+import BeerItem from "./ItemBeer";
+import { mapGetters, mapActions } from "vuex";
+
 export default {
   name: "BeerList",
-  mounted(){
-    console.log('auf')
-   },
-  data() {
-    return {
-      data: "", //for input
-    };
+  components: {
+    BeerItem,
+  },
+  computed: {
+    ...mapGetters(["allBeers"]),
+  },
+  methods: {
+    ...mapActions(["fetchBeers"]),
+  },
+  async mounted() {
+    this.fetchBeers();
   },
 };
 </script>
