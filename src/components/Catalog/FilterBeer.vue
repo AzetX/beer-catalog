@@ -1,8 +1,13 @@
 <template>
   <div>
-    <select v-model="selected">
-      <option v-for="(option, index) in options" :key="index">
-        {{ option }}
+    <select v-model="sortType" @change="sortingBeer(sortType)">
+      <option disabled value="">Sorting list beer...</option>
+      <option
+        v-for="(option, index) in sortOptions"
+        :key="index"
+        :value="option.value"
+      >
+        {{ option.text }}
       </option>
     </select>
   </div>
@@ -11,12 +16,24 @@
 
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "FilterBeer",
   data() {
     return {
-      options: ["Choose a value from the list...", "A-Z", "Z-A"],
+      sortType: "",
+      sortOptions: [
+        { text: "A-Z", value: "A-Z" },
+        { text: "Z-A", value: "Z-A" },
+      ],
     };
+  },
+  methods: {
+    // ...mapMutations(["sorting"]),
+    ...mapActions(["sortBeer"]),
+    sortingBeer(sortType) {
+      this.sortBeer(sortType);
+    },
   },
 };
 </script>
