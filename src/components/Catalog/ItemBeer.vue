@@ -24,8 +24,9 @@
 
 
 <script>
+// http://htmlbook.ru/html/datalist
 export default {
-  name: "BeerItem",
+  name: "ItemBeer",
   props: {
     beer: {
       type: Object,

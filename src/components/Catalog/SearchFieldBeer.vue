@@ -5,21 +5,31 @@
       type="text"
       placeholder="Search product..."
       id="search-bear"
-      v-model="searchBeer"
+      v-model="beerItem"
+      @change="searchingBeer(beerItem)"
     />
-    <p>{{ searchBeer }}</p>
+    <p>{{ beerItem }}</p>
   </div>
 </template>
 
 
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "SearchFieldBeer",
   data() {
     return {
-      searchBeer: "", //for input
+      beerItem: "", //for input
     };
+  },
+  methods: {
+    ...mapActions(["searchBeer"]),
+    searchingBeer(beerItem) {
+      this.searchBeer(beerItem);
+      this.$router.push("infoBeer");
+      this.beerItem = "";
+    },
   },
 };
 </script>
